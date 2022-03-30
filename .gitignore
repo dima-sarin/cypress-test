@@ -1,0 +1,6 @@
+### JetBrains stuff
+*.iml
+.idea/
+
+# Angular
+node_modules/
