@@ -66,7 +66,6 @@ describe('Suite for managing the customers', function () {
         assertCustomer(user);
         cy.openNewSalesOrderPage();
         addSalesOrder.assignCustomer()
-        //Todo: click on Billing address and assert against the values
 
         addSalesOrder.editBillingInformation("new address")
         addSalesOrder.deleteSalesOrder()
@@ -80,7 +79,6 @@ describe('Suite for managing the customers', function () {
         assertCustomer(user);
         cy.openNewSalesOrderPage();
         addSalesOrder.assignCustomer()
-        //Todo: click on Billing address and assert against the values
 
         addSalesOrder.removeBillingInformation()
         addSalesOrder.deleteSalesOrder()
@@ -88,6 +86,8 @@ describe('Suite for managing the customers', function () {
 
 
 });
+
+//todo: needs to be moved to one of the pages
 function assertCustomer(user) {
     cy.location('pathname').invoke('split', '/').its(2).as("customerID")
 
@@ -99,6 +99,6 @@ function assertCustomer(user) {
     cy.get('@customerID').then(id => {
         const customerHref = "/customer/" + id;
         cy.contains("a", `${user.name}`).should("have.attr", "href", customerHref).click();
-        //Todo: click on it and assert against the values
+        //Todo: click on customer and assert against the values
     })
 }
