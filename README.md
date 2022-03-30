@@ -1,2 +1,3 @@
-# cypress-test
-My first and ugly attempt to play around with Cypress framework
+# Cypress UI suite
+
+This repository contains the suite based on the Cypress framework.
