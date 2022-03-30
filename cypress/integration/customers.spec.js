@@ -16,10 +16,6 @@ describe('Suite for managing the customers', function () {
 
     });
 
-    afterEach(() => {
-        addCustomer.deleteCustomer(user.name)
-    });
-
     let user;
 
     it('Add new customer via global add', () => {
@@ -27,6 +23,7 @@ describe('Suite for managing the customers', function () {
         header.clickAddCustomer();
         user = addCustomer.populateCustomerData(false);
         assertCustomer(user);
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Add new customer via new customer button', () => {
@@ -34,6 +31,7 @@ describe('Suite for managing the customers', function () {
         customers.clickNewCustomer();
         user = addCustomer.populateCustomerData(false);
         assertCustomer(user);
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Add new customer and syntax check', () => {
@@ -41,6 +39,7 @@ describe('Suite for managing the customers', function () {
         header.clickAddCustomer();
         user = addCustomer.populateCustomerData(false);
         addCustomer.checkSyntax(user.name);
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Add new customer with the address', () => {
@@ -48,6 +47,7 @@ describe('Suite for managing the customers', function () {
         header.clickAddCustomer();
         user = addCustomer.populateCustomerData(true);
         assertCustomer(user);
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Add new customer and use billing address', () => {
@@ -56,6 +56,7 @@ describe('Suite for managing the customers', function () {
         user = addCustomer.populateCustomerData(true);
         addCustomer.useBillingAndDeleteOther();
         assertCustomer(user);
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Assign customer to Sell Order and edit billing information', () => {
@@ -69,6 +70,7 @@ describe('Suite for managing the customers', function () {
 
         addSalesOrder.editBillingInformation("new address")
         addSalesOrder.deleteSalesOrder()
+        addCustomer.deleteCustomer(user.name)
     });
 
     it('Assign customer to Sell Order and remove billing information', () => {
@@ -82,6 +84,7 @@ describe('Suite for managing the customers', function () {
 
         addSalesOrder.removeBillingInformation()
         addSalesOrder.deleteSalesOrder()
+        addCustomer.deleteCustomer(user.name)
     });
 
 
@@ -98,7 +101,7 @@ function assertCustomer(user) {
 
     cy.get('@customerID').then(id => {
         const customerHref = "/customer/" + id;
-        cy.contains("a", `${user.name}`).should("have.attr", "href", customerHref).click();
-        //Todo: click on customer and assert against the values
+        cy.get('a[href="' + customerHref + '"][data-testid=cellName]').click()
+        //Todo: Assert against the values we filled in initially
     })
 }

@@ -4,3 +4,6 @@
 
 # Angular
 node_modules/
+
+# Videos
+cypress/videos/
