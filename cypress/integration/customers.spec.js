@@ -1,6 +1,6 @@
 const {cy: CyStrings} = require("../fixtures/URLStubs/CyStrings");
 import addCustomer from '../pages/addCustomer';
-import addSalesOrder from '../pages/AddSalesOrder';
+import addSalesOrder from '../pages/addSalesOrder';
 import customers from '../pages/customers';
 import header from '../pages/header';
 
